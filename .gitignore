@@ -1,0 +1,18 @@
+.env
+.env.*
+.inputs/
+.input/
+
+# Maven / Java build output
+**/target/
+
+# Node / frontend artifacts
+**/node_modules/
+**/dist/
+
+# IDE files
+*.iml
+.vscode/launch.json
+.claude/settings.local.json
+
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:tags="[]"
+        cq:template="/conf/wknd/settings/wcm/templates/experience-fragment-web-variation-template"
+        cq:xfMasterVariation="{Boolean}true"
+        cq:xfVariantType="web"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Danone Footer"
+        sling:resourceType="wknd/components/xfpage">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wknd/components/container">
+            <danone-footer
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wknd/components/danone-footer"
+                jobsAllUrl="#"
+                jobsAllLabel="ALL UK AND IRELAND JOBS"
+                facebookUrl="#"
+                instagramUrl="#"
+                linkedinUrl="#"
+                copyrightText="COOKIES | PRIVACY POLICY | DANONE.COM"/>
+        </root>
+    </jcr:content>
+</jcr:root>
