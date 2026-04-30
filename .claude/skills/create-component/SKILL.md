@@ -299,6 +299,17 @@ public class CustomModel implements ComponentExporter {
 
 **Load:** `references/clientlib-patterns.md`**If Figma URL provided, ALSO load:** `references/figma-design-rules.md` (Rules 6, 7) — Extract exact colors, fonts, sizes, spacing, border-radius from the Figma response. Place all CSS into `css/{component-name}.css` using BEM naming. Create JS in `js/{component-name}.js` only if the design implies interactivity. Verify pixel-perfect fidelity against the Figma screenshot.
 
+### 3.7.5 Storybook Story — Create for Every Component
+
+**Path:** `ui.frontend/stories/{component-name}.stories.js`
+
+Always create a story file alongside the SCSS. Mirror the HTML structure from the HTL template using plain JS string concatenation (no JSX/framework). Include at least:
+- `Default` — fully populated with realistic sample data
+- `Empty` — no authored content (validates the placeholder/empty state)
+- Additional variants if the component has meaningful optional sections (e.g., `NoSocial`, `TitleOnly`)
+
+Follow the pattern from existing stories in `ui.frontend/stories/` (plain class with a `get markup()` getter, `import '../src/main/webpack/site/main.scss'`).
+
 ### 3.8 Dialog Clientlib - If Conditional Logic
 
 **Path:** `ui.apps/.../clientlibs/clientlib-{component-name}-dialog/`
@@ -335,6 +346,7 @@ Component '{component-name}' created successfully!
 - core/.../models/{ComponentName}Model.java
 - core/.../models/{ComponentName}ModelTest.java
 - ui.apps/.../clientlibs/clientlib-{component-name}/
+- ui.frontend/stories/{component-name}.stories.js
 [+ servlet files if applicable]
 
 ## Dialog Fields (Exact Match)
