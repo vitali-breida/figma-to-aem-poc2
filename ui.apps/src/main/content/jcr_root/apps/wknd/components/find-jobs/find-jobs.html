@@ -1,0 +1,83 @@
+<!--/* Find Jobs Component */-->
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.FindJobs"/>
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+
+<sly data-sly-test="${model.hasContent}">
+    <section class="cmp-find-jobs" data-cmp-is="find-jobs">
+        <form class="cmp-find-jobs__form" method="get" novalidate>
+
+            <div class="cmp-find-jobs__search-row">
+
+                <!--/* Text search input */-->
+                <div class="cmp-find-jobs__field cmp-find-jobs__field--search">
+                    <input
+                        type="text"
+                        class="cmp-find-jobs__input"
+                        name="q"
+                        placeholder="${model.searchPlaceholder @ context='attribute'}"
+                        aria-label="${model.searchPlaceholder @ context='attribute'}"/>
+                    <span class="cmp-find-jobs__search-icon" aria-hidden="true"></span>
+                </div>
+
+                <!--/* Countries dropdown */-->
+                <sly data-sly-test="${model.countriesItems.size > 0}">
+                    <div class="cmp-find-jobs__field cmp-find-jobs__field--dropdown">
+                        <select class="cmp-find-jobs__select" name="country" aria-label="${model.countriesLabel @ context='attribute'}">
+                            <option value="">${model.countriesLabel}</option>
+                            <sly data-sly-list.option="${model.countriesItems}">
+                                <option value="${option.value @ context='attribute'}">${option.text}</option>
+                            </sly>
+                        </select>
+                        <span class="cmp-find-jobs__dropdown-icon" aria-hidden="true"></span>
+                    </div>
+                </sly>
+
+                <!--/* Teams dropdown */-->
+                <sly data-sly-test="${model.teamsItems.size > 0}">
+                    <div class="cmp-find-jobs__field cmp-find-jobs__field--dropdown">
+                        <select class="cmp-find-jobs__select" name="team" aria-label="${model.teamsLabel @ context='attribute'}">
+                            <option value="">${model.teamsLabel}</option>
+                            <sly data-sly-list.option="${model.teamsItems}">
+                                <option value="${option.value @ context='attribute'}">${option.text}</option>
+                            </sly>
+                        </select>
+                        <span class="cmp-find-jobs__dropdown-icon" aria-hidden="true"></span>
+                    </div>
+                </sly>
+
+                <!--/* Expertises dropdown */-->
+                <sly data-sly-test="${model.expertisesItems.size > 0}">
+                    <div class="cmp-find-jobs__field cmp-find-jobs__field--dropdown">
+                        <select class="cmp-find-jobs__select" name="expertise" aria-label="${model.expertisesLabel @ context='attribute'}">
+                            <option value="">${model.expertisesLabel}</option>
+                            <sly data-sly-list.option="${model.expertisesItems}">
+                                <option value="${option.value @ context='attribute'}">${option.text}</option>
+                            </sly>
+                        </select>
+                        <span class="cmp-find-jobs__dropdown-icon" aria-hidden="true"></span>
+                    </div>
+                </sly>
+
+            </div>
+
+            <!--/* Submit button */-->
+            <div class="cmp-find-jobs__actions">
+                <button type="submit" class="cmp-find-jobs__button">
+                    ${model.buttonLabel}
+                </button>
+            </div>
+
+        </form>
+    </section>
+</sly>
+
+<!--/* Empty state for authors */-->
+<sly data-sly-test="${!model.hasContent && wcmmode.edit}">
+    <div class="cmp-find-jobs cmp-find-jobs--empty">
+        ${'Please configure the Find Jobs component' @ i18n}
+    </div>
+</sly>
+
+<sly data-sly-test="${wcmmode.disabled}">
+    <sly data-sly-call="${clientlib.js @ categories='wknd.components.find-jobs'}"/>
+</sly>

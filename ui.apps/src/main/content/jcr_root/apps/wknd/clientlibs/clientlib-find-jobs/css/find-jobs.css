@@ -1,0 +1,213 @@
+/**
+ * Component: find-jobs
+ * Figma: Danone v2 — 1440 / Jobs / NoResults (node 132:53)
+ */
+
+/* ============================================================
+   Block
+   ============================================================ */
+.cmp-find-jobs {
+    display: block;
+    padding: 24px 0 32px;
+}
+
+.cmp-find-jobs--empty {
+    border: 2px dashed #ccc;
+    padding: 1.5rem;
+    text-align: center;
+    color: #696969;
+    border-radius: 8px;
+}
+
+/* ============================================================
+   Form layout
+   ============================================================ */
+.cmp-find-jobs__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.cmp-find-jobs__search-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1164px;
+    padding: 0 14px;
+    box-sizing: border-box;
+}
+
+/* ============================================================
+   Input field (search)
+   ============================================================ */
+.cmp-find-jobs__field {
+    position: relative;
+    flex: 0 0 245px;
+    height: 60px;
+}
+
+.cmp-find-jobs__input,
+.cmp-find-jobs__select {
+    width: 100%;
+    height: 100%;
+    padding: 0 48px 0 20px;
+    background: #ffffff;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #202020;
+    line-height: 30px;
+    appearance: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.cmp-find-jobs__input {
+    cursor: text;
+}
+
+.cmp-find-jobs__input::placeholder {
+    color: #696969;
+}
+
+.cmp-find-jobs__input:focus,
+.cmp-find-jobs__select:focus {
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+    outline: 2px solid #0045FF;
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   Icons inside fields
+   ============================================================ */
+.cmp-find-jobs__search-icon,
+.cmp-find-jobs__dropdown-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+}
+
+/* Search icon — magnifier using CSS */
+.cmp-find-jobs__search-icon::before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #202020;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cmp-find-jobs__search-icon::after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 8px;
+    background: #202020;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    transform: rotate(45deg);
+    transform-origin: top center;
+}
+
+/* Dropdown chevron using CSS */
+.cmp-find-jobs__dropdown-icon::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #202020;
+    border-bottom: 2px solid #202020;
+    transform: rotate(45deg) translateY(-3px);
+    position: absolute;
+    top: 4px;
+    left: 7px;
+}
+
+/* ============================================================
+   Submit button
+   ============================================================ */
+.cmp-find-jobs__actions {
+    display: flex;
+    justify-content: center;
+}
+
+.cmp-find-jobs__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    height: 45px;
+    padding: 0 28px;
+    background-color: #f3d03d;
+    color: #202020;
+    border: none;
+    border-radius: 20px;
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+
+.cmp-find-jobs__button:hover {
+    background-color: #e5c230;
+}
+
+.cmp-find-jobs__button:focus {
+    outline: 2px solid #0045FF;
+    outline-offset: 2px;
+}
+
+.cmp-find-jobs__button:active {
+    transform: scale(0.98);
+}
+
+/* ============================================================
+   Responsive — Tablet
+   ============================================================ */
+@media (max-width: 1024px) {
+    .cmp-find-jobs__field {
+        flex: 0 0 calc(50% - 8px);
+    }
+}
+
+/* ============================================================
+   Responsive — Mobile
+   ============================================================ */
+@media (max-width: 767px) {
+    .cmp-find-jobs__search-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .cmp-find-jobs__field {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .cmp-find-jobs__button {
+        width: 100%;
+    }
+}
