@@ -1,0 +1,68 @@
+{
+  "footer-bar": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/footer-bar",
+    "title": "Site Footer",
+    "navLinks": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "linkTitle": "Teams",
+        "linkUrl": "/content/wknd/teams"
+      },
+      "item1": {
+        "jcr:primaryType": "nt:unstructured",
+        "linkTitle": "Brands",
+        "linkUrl": "/content/wknd/brands"
+      }
+    },
+    "socialIcons": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "iconPath": "/content/dam/wknd/icons/facebook.svg",
+        "linkUrl": "https://www.facebook.com/danone"
+      },
+      "item1": {
+        "jcr:primaryType": "nt:unstructured",
+        "iconPath": "/content/dam/wknd/icons/linkedin.svg",
+        "linkUrl": "https://www.linkedin.com/company/danone"
+      }
+    },
+    "legalLinks": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "linkTitle": "Cookies",
+        "linkUrl": "/content/wknd/legal/cookies"
+      },
+      "item1": {
+        "jcr:primaryType": "nt:unstructured",
+        "linkTitle": "Privacy Policy",
+        "linkUrl": "/content/wknd/legal/privacy"
+      }
+    }
+  },
+  "empty": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/footer-bar"
+  },
+  "title-only": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/footer-bar",
+    "title": "Footer"
+  },
+  "no-social": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/footer-bar",
+    "title": "Footer Without Social",
+    "navLinks": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "linkTitle": "Teams",
+        "linkUrl": "/content/wknd/teams"
+      }
+    }
+  }
+}

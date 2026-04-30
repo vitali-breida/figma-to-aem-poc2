@@ -97,28 +97,56 @@ public class MyComponentModel { ... }
 
 ---
 
-## 6. Multifield Items Not Saving
+## 6. Composite Multifield Items Not Saving to JCR
 
-**Cause:** Composite multifield misconfigured — missing `composite=true` or child field names lack `./` prefix.
+**Cause:** `name` attribute placed on the outer `<multifield>` element instead of on the inner `<field>` (container/fieldset). When `name` is on the multifield, values are sent flat and child nodes are never created.
 
-**Fix:** Set `composite="{Boolean}true"` on the multifield node and ensure each child field uses `./` names.
+**Fix:** Put `name="./nodeName"` on the `<field>` element inside the multifield, NOT on the multifield itself. The XML node name of the multifield (e.g., `<links>`) is not enough — the `<field>` needs the explicit `name`.
 
 ```xml
-<items jcr:primaryType="nt:unstructured"
-       sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
-       composite="{Boolean}true"
-       fieldLabel="Links"
-       name="./links">
-  <field jcr:primaryType="nt:unstructured"
-         sling:resourceType="granite/ui/components/coral/foundation/container">
-    <items jcr:primaryType="nt:unstructured">
-      <linkText jcr:primaryType="nt:unstructured"
+<!-- ✅ Correct — name on the inner <field> -->
+<links
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+    composite="{Boolean}true"
+    fieldLabel="Links">
+    <field
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container"
+        name="./links">
+        <items jcr:primaryType="nt:unstructured">
+            <linkText
+                jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                 fieldLabel="Link Text"
                 name="./linkText"/>
-    </items>
-  </field>
-</items>
+        </items>
+    </field>
+</links>
+
+<!-- ❌ Wrong — name on the outer multifield, nothing saves -->
+<links
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+    composite="{Boolean}true"
+    fieldLabel="Links"
+    name="./links">
+    <field
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        ...
+    </field>
+</links>
+```
+
+JCR result when correct:
+```
+component/
+  links/
+    item0/
+      linkText: "Teams"
+    item1/
+      linkText: "Brands"
 ```
 
 ---
@@ -236,3 +264,21 @@ If you need to hide an inherited tab in the dialog:
     <div data-sly-resource="${'image' @ resourceType='core/wcm/components/image/v3/image'}"></div>
 </div>
 ```
+
+---
+
+## 12. Component Changes Not Applying After Deployment (Same Version)
+
+**Cause:** AEM Package Manager skips re-installation if the package version hasn't changed since the last install. This is common when iterating on a component: you rebuild, deploy, but AEM serves stale content because it considers the package already installed.
+
+**Fix:** Bump the project version before deploying so Package Manager treats it as a new package:
+
+```bash
+# Bump version across all modules (replace X.Y.Z with the new version)
+mvn versions:set -DnewVersion=X.Y.Z
+
+# Then rebuild and deploy
+mvn clean install -PautoInstallSinglePackage
+```
+
+After confirming the changes are applied, you can bump again to the next development version (e.g., `X.Y.Z-SNAPSHOT`) or leave it as-is for the iteration.

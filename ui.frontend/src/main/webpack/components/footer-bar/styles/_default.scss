@@ -1,0 +1,137 @@
+/*
+ *  Copyright 2019 Adobe Systems Incorporated
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+// Footer bar — Danone brand footer
+// Figma: node 132:65, file fnBhyEZSFQEcBfbsydXBYH
+// Background: #002677 (Danone navy, no WKND token equivalent)
+// Typography: Bariol (brand font, loaded externally)
+
+$footer-bar-bg:           #002677;
+$footer-bar-accent:       #005EB8;
+$footer-bar-font-nav:     'Bariol', 'Source Sans Pro', sans-serif;
+$footer-bar-tracking:     5px;
+
+/* BLOCK */
+.cmp-footer-bar {
+    background-color: $footer-bar-bg;
+    padding: ($gutter-padding * 3) ($gutter-padding * 2);
+    position: relative;
+    text-align: center;
+}
+
+/* ELEMENT — nav */
+.cmp-footer-bar__nav {
+    margin-bottom: $gutter-padding * 2;
+}
+
+.cmp-footer-bar__nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $gutter-padding * 3;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cmp-footer-bar__nav-item {
+    display: inline-block;
+}
+
+.cmp-footer-bar__nav-link {
+    color: $white;
+    font-family: $footer-bar-font-nav;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: $footer-bar-tracking;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
+}
+
+/* ELEMENT — social */
+.cmp-footer-bar__social {
+    display: flex;
+    justify-content: center;
+    gap: $gutter-padding * 2;
+    margin-bottom: $gutter-padding * 2;
+}
+
+.cmp-footer-bar__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover,
+    &:focus {
+        opacity: 0.8;
+    }
+}
+
+.cmp-footer-bar__social-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+/* ELEMENT — legal */
+.cmp-footer-bar__legal {
+    color: $white;
+    font-family: $footer-bar-font-nav;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: $footer-bar-tracking;
+}
+
+.cmp-footer-bar__legal-link {
+    color: $white;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:not(:last-child)::after {
+        content: ' | ';
+    }
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
+}
+
+/* Responsive — stack nav vertically on phone */
+@media (max-width: $screen-small) {
+    .cmp-footer-bar {
+        padding: ($gutter-padding * 2) $gutter-padding;
+    }
+
+    .cmp-footer-bar__nav-list {
+        flex-direction: column;
+        gap: $gutter-padding;
+        align-items: center;
+    }
+
+    .cmp-footer-bar__social {
+        gap: $gutter-padding;
+    }
+
+    .cmp-footer-bar__legal {
+        font-size: 14px;
+    }
+}
