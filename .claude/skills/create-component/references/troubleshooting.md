@@ -267,18 +267,18 @@ If you need to hide an inherited tab in the dialog:
 
 ---
 
-## 12. Component Changes Not Applying After Deployment (Same Version)
+## 12. Always Bump Version When Adding a New Component
 
-**Cause:** AEM Package Manager skips re-installation if the package version hasn't changed since the last install. This is common when iterating on a component: you rebuild, deploy, but AEM serves stale content because it considers the package already installed.
+**Rule:** Every time a new component is created and deployed, bump the project version **before** running `mvn clean install -PautoInstallSinglePackage`. This is mandatory, not optional.
 
-**Fix:** Bump the project version before deploying so Package Manager treats it as a new package:
+**Why:** AEM Package Manager skips re-installation when the package version matches what's already installed. Without a version bump, your new component files are compiled but never actually written to AEM — the component won't appear in the authoring UI and no error is shown.
 
 ```bash
-# Bump version across all modules (replace X.Y.Z with the new version)
+# 1. Read current version from root pom.xml, increment patch (e.g. 4.5.1 → 4.5.2)
 mvn versions:set -DnewVersion=X.Y.Z
 
-# Then rebuild and deploy
+# 2. Deploy
 mvn clean install -PautoInstallSinglePackage
 ```
 
-After confirming the changes are applied, you can bump again to the next development version (e.g., `X.Y.Z-SNAPSHOT`) or leave it as-is for the iteration.
+**How to pick the new version:** read the current version from `pom.xml` (`<version>` in the root), increment the patch number by 1.

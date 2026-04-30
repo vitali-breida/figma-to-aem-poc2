@@ -352,7 +352,16 @@ Component '{component-name}' created successfully!
 ## Dialog Fields (Exact Match)
 {table matching specification}
 
-Would you like me to add any additional fields or build the project?
+## Deploy Commands
+Run these in order to deploy the new component:
+```bash
+# 1. Read current version from root pom.xml and increment patch by 1
+mvn versions:set -DnewVersion=X.Y.Z
+
+# 2. Build and deploy
+mvn clean install -PautoInstallSinglePackage
+```
+⚠️ The version bump is mandatory — AEM Package Manager skips unchanged versions.
 ```
 
 ## Quick Reference: Field Type Mapping
