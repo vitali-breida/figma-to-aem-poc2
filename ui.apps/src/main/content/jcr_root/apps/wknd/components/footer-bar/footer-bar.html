@@ -18,6 +18,8 @@
      data-sly-test.hasContent="${!footerBar.empty}"
      class="cmp-footer-bar">
 
+    <p data-sly-test="${footerBar.title}" class="cmp-footer-bar__title">${footerBar.title @ context='text'}</p>
+
     <nav class="cmp-footer-bar__nav" aria-label="${footerBar.title @ i18n}">
         <ul class="cmp-footer-bar__nav-list">
             <li data-sly-repeat.link="${footerBar.navLinks}"

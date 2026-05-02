@@ -7,7 +7,7 @@ export default {
 };
 
 export const Default = () => new FooterBar({
-  title: 'Site Footer',
+  title: 'TODOS LOS TRABAJOS',
   navLinks: [
     { linkTitle: 'Teams', linkUrl: '/content/wknd/teams' },
     { linkTitle: 'Brands', linkUrl: '/content/wknd/brands' },
@@ -73,6 +73,7 @@ class FooterBar {
 
     return `
       <div class="cmp-footer-bar">
+        ${this.title ? `<p class="cmp-footer-bar__title">${this.title}</p>` : ''}
         <nav class="cmp-footer-bar__nav" aria-label="${this.title}">
           <ul class="cmp-footer-bar__nav-list">
             ${navItems}

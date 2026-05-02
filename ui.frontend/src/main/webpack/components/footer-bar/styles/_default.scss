@@ -32,6 +32,25 @@ $footer-bar-tracking:     5px;
     text-align: center;
 }
 
+/* ELEMENT — title (CTA button, Figma: button/primaryDesktop with BlogScript text) */
+.cmp-footer-bar .cmp-footer-bar__title {
+    display: block;
+    width: fit-content;
+    margin: 0 auto ($gutter-padding * 3);
+    background-color: #f3d03d;
+    color: $black;
+    font-family: 'BlogScript', cursive;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 36px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 8px 32px;
+    border-radius: 4px;
+}
+
 /* ELEMENT — nav */
 .cmp-footer-bar__nav {
     margin-bottom: $gutter-padding * 2;

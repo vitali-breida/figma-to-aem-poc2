@@ -282,3 +282,19 @@ mvn clean install -PautoInstallSinglePackage
 ```
 
 **How to pick the new version:** read the current version from `pom.xml` (`<version>` in the root), increment the patch number by 1.
+
+---
+
+## 13. CSS Changes Not Showing After `autoInstallSinglePackage`
+
+**Cause:** `mvn clean install -PautoInstallSinglePackage` installs the `all` aggregate package. Inside it, `ui.apps` is an embedded sub-package. AEM Package Manager sometimes skips re-installing an embedded sub-package if it considers it already up-to-date — even after a version bump. The result: the JCR clientlib (`/apps/wknd/clientlibs/clientlib-site/css/site.css`) stays at the old version while the component HTL is updated.
+
+**Fix:** Deploy `ui.apps` directly, bypassing the `all` aggregator:
+
+```bash
+mvn clean install -PautoInstallPackage -pl ui.apps
+```
+
+`-pl ui.apps` tells Maven to build only the `ui.apps` module (not all 12 modules). Direct installation always does a full overwrite of `/apps/wknd/clientlibs/` without sub-package caching logic.
+
+**Verify:** visit `http://localhost:4502/apps/wknd/clientlibs/clientlib-site/css/site.css` and search for your new CSS class — if it's there, AEM has the correct version.
