@@ -334,6 +334,19 @@ Follow the pattern from existing stories in `ui.frontend/stories/` (plain class 
 - Most common APIs included in `aem-sdk-api` (GSON, Jackson, Commons)
 - Use `provided` scope for AEM runtime libraries
 
+### 3.12 Version Bump — MANDATORY, execute with Bash before finishing
+
+> ⚠️ **Do NOT skip this step. Do NOT just print it as a deploy command for the user.**
+> AEM Package Manager silently skips packages whose version hasn't changed — the component will not appear in AEM without this bump.
+
+1. Read the current `<version>` value from the root `pom.xml`
+2. Increment the **patch** number by 1 (e.g. `4.5.2` → `4.5.3`)
+3. Execute with the Bash tool:
+   ```
+   mvn versions:set -DnewVersion={incremented-version} -DgenerateBackupPoms=false
+   ```
+4. Verify the new version appears in `pom.xml`, `core/pom.xml`, `ui.apps/pom.xml`
+
 ## Step 4: Completion Summary
 
 ```
@@ -352,16 +365,10 @@ Component '{component-name}' created successfully!
 ## Dialog Fields (Exact Match)
 {table matching specification}
 
-## Deploy Commands
-Run these in order to deploy the new component:
+## Deploy Command
 ```bash
-# 1. Read current version from root pom.xml and increment patch by 1
-mvn versions:set -DnewVersion=X.Y.Z
-
-# 2. Build and deploy
 mvn clean install -PautoInstallSinglePackage
 ```
-⚠️ The version bump is mandatory — AEM Package Manager skips unchanged versions.
 ```
 
 ## Quick Reference: Field Type Mapping

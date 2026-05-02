@@ -1,0 +1,77 @@
+<!--/* Site Header Component */-->
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.SiteHeader"/>
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.css @ categories='wknd.components.site-header'}"/>
+</sly>
+
+<sly data-sly-test="${model.hasContent}">
+    <nav class="cmp-site-header" data-cmp-is="site-header" aria-label="${'Main Navigation' @ i18n}">
+
+        <!--/* Logo */-->
+        <div class="cmp-site-header__logo">
+            <a href="${model.logoLink @ extension='html'}"
+               class="cmp-site-header__logo-link"
+               aria-label="${model.logoAlt @ context='attribute'}"
+               data-sly-test="${model.logoLink}">
+                <img src="${model.logoImage}"
+                     alt="${model.logoAlt @ context='attribute'}"
+                     class="cmp-site-header__logo-img"
+                     loading="lazy"/>
+            </a>
+            <img src="${model.logoImage}"
+                 alt="${model.logoAlt @ context='attribute'}"
+                 class="cmp-site-header__logo-img"
+                 loading="lazy"
+                 data-sly-test="${model.logoImage && !model.logoLink}"/>
+        </div>
+
+        <!--/* Navigation Links */-->
+        <ul class="cmp-site-header__nav" role="list" data-sly-test="${model.navItems.size > 0}">
+            <sly data-sly-list.navItem="${model.navItems}">
+                <li class="cmp-site-header__nav-item">
+                    <a href="${navItem.link @ extension='html'}"
+                       data-sly-attribute.class="${navItem.highlighted ? 'cmp-site-header__nav-link cmp-site-header__nav-link--highlighted' : 'cmp-site-header__nav-link'}">
+                        ${navItem.label}
+                        <span class="cmp-site-header__dropdown-icon"
+                              aria-hidden="true"
+                              data-sly-test="${navItem.hasDropdown}"></span>
+                    </a>
+                </li>
+            </sly>
+        </ul>
+
+        <!--/* CTA Button */-->
+        <a href="${model.ctaLink @ extension='html'}"
+           class="cmp-site-header__cta"
+           data-sly-test="${model.ctaLabel}">
+            ${model.ctaLabel}
+        </a>
+
+        <!--/* Divider */-->
+        <span class="cmp-site-header__divider" aria-hidden="true"></span>
+
+        <!--/* Language Selector */-->
+        <div class="cmp-site-header__language" data-sly-test="${model.languageLabel}">
+            <span class="cmp-site-header__language-label">${model.languageLabel}</span>
+            <span class="cmp-site-header__dropdown-icon" aria-hidden="true"></span>
+        </div>
+
+        <!--/* Notification Bell */-->
+        <a href="${model.notificationsLink @ extension='html'}"
+           class="cmp-site-header__notifications"
+           aria-label="${'Notifications' @ i18n}"
+           data-sly-test="${model.showNotifications}">
+            <span class="cmp-site-header__bell-icon" aria-hidden="true"></span>
+        </a>
+
+    </nav>
+</sly>
+
+<!--/* Empty state for authors */-->
+<sly data-sly-test="${!model.hasContent && wcmmode.edit}">
+    <div class="cmp-site-header cmp-site-header--empty">
+        ${'Please configure the Site Header component' @ i18n}
+    </div>
+</sly>
+
+<sly data-sly-call="${clientlib.js @ categories='wknd.components.site-header'}"/>
